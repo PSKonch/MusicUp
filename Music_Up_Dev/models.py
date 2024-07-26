@@ -1,40 +1,56 @@
 from django.db import models
 from django.urls import reverse
-
-# Create your models here.
-class Post(models.Model):
-
-    post_name = models.CharField(max_length=50, blank=False)
-    is_published = models.BooleanField()
-
-    class Meta:
-        verbose_name = ("Post")
-        verbose_name_plural = ("Posts")
-
-    def __str__(self):
-        return self.post_name
-
-    def get_absolute_url(self):
-        return reverse("_detail", kwargs={"pk": self.pk})
+from django.contrib.auth.models import AbstractUser, BaseUserManager
 
 
-
-class Artist(models.Model):
-
-    nick_name = models.CharField(max_length=50, blank=False)
-    password = models.CharField(max_length=50, blank=False)
+class CustomUser(models.Model):
+    is_artist = models.BooleanField(default=True)
+    is_editor = models.BooleanField(default=True)
     
-    email = models.EmailField(max_length=254, blank=False)
+    user_email = models.EmailField(max_length=254)
+    user_password = models.CharField(max_length=100)
+    user_name = models.CharField(max_length=100)
 
-    artist_post = models.ForeignKey(Post, verbose_name=("art_post"), on_delete=models.CASCADE, blank=True)
+class Artist(CustomUser):
+    
+    description = models.TextField(blank=True)
+    image = models.ImageField(upload_to='', blank=True)
+    
+    def __str__(self) -> str:
+        return self.user_name
 
-    class Meta:
-        verbose_name = ("Artist")
-        verbose_name_plural = ("Artists")
+class Editor(CustomUser):
+    
+    def __str__(self) -> str:
+        return self.user_name
+
+class Album(models.Model):
+    artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
+    album_title = models.CharField(max_length=300, blank=False)
+    genre = models.CharField(max_length=100, blank=False)
+    album_logo = models.ImageField()
 
     def __str__(self):
-        return self.name
+        return self.album_title + '-' + self.artist
+    
+class Song(models.Model):
+   album = models.ForeignKey(Album, on_delete=models.CASCADE)
+   song_title = models.CharField(max_length=250)
+   is_favorite = models.BooleanField(default=False)
+   file = models.FileField(upload_to='')
 
-    def get_absolute_url(self):
-        return reverse("_detail", kwargs={"pk": self.pk})
+   def __str__(self):
+       return self.song_title
+   
+class Post(models.Model):
+    title = models.CharField(max_length=200)
+    content = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    author = models.ForeignKey(Artist, on_delete=models.CASCADE)
+    
+class News(models.Model):
+    title = models.CharField(max_length=200)
+    content = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    author = models.ForeignKey(Editor, on_delete=models.CASCADE)
     
