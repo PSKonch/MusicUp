@@ -42,15 +42,14 @@ class Song(models.Model):
    def __str__(self):
        return self.song_title
    
-class Post(models.Model):
+class Post_News(models.Model):
     title = models.CharField(max_length=200)
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
+   
+class Post(Post_News):
     author = models.ForeignKey(Artist, on_delete=models.CASCADE)
     
-class News(models.Model):
-    title = models.CharField(max_length=200)
-    content = models.TextField()
-    created_at = models.DateTimeField(auto_now_add=True)
+class News(Post_News):
     author = models.ForeignKey(Editor, on_delete=models.CASCADE)
     
