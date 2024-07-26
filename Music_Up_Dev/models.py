@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from django.contrib.auth.models import AbstractUser, BaseUserManager
+from django.utils import timezone
 
 
 class CustomUser(models.Model):
@@ -45,7 +46,7 @@ class Song(models.Model):
 class Post_News(models.Model):
     title = models.CharField(max_length=200)
     content = models.TextField()
-    created_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(auto_now_add=timezone.now)
    
 class Post(Post_News):
     author = models.ForeignKey(Artist, on_delete=models.CASCADE)
