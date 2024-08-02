@@ -11,3 +11,5 @@ def News(request):
 def Artists(request):
     return HttpResponse("Artists")
 
+def Posts(request):
+    return HttpResponse('posts')
