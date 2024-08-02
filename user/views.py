@@ -6,7 +6,7 @@ from django.contrib.auth import get_user, get_user_model
 
 
 def login(request):
-    ...
+    return HttpResponse("Логин")
 
 def logout(request):
     return HttpResponse("Логаут")
