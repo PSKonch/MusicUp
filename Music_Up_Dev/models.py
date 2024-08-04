@@ -11,6 +11,9 @@ class CustomUser(models.Model):
     user_email = models.EmailField(max_length=254)
     user_password = models.CharField(max_length=100)
     user_name = models.CharField(max_length=100)
+    
+    def __str__(self) -> str:
+        return self.user_email
 
 class Artist(CustomUser):
     
