@@ -1,17 +1,38 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link type="text/css" href="{% 'Music_Up_Dev/css/styles.css' %}" rel="stylesheet" />
-    <title>Document</title>
+    <link type="text/css" href="{% static 'Music_Up_Dev/css/style.css' %}" rel="stylesheet" />
+    <title>Music Up Dev Users</title>
 </head>
 <body>
+    <header>
+        <div class="container">
+            <div id="branding">
+                <h1><span class="highlight">Music Up</span> Dev</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="">Home</a></li>
+                    <li><a href="">About</a></li>
+                    <li><a href="">Services</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
-    <ul>
+    <div class="container">
         {% for i in content %}
-            <p>{{ i }}</p>
+            <div class="user-card">
+                <h2>{{ i.user_name }}</h2>
+                <p><strong>Email:</strong> {{ i.user_email }}</p>
+                <p><strong>Artist:</strong> {% if i.is_artist %}Yes{% else %}No{% endif %}</p>
+                <p><strong>Editor:</strong> {% if i.is_editor %}Yes{% else %}No{% endif %}</p>
+            </div>
         {% endfor %}
-    </ul>
+    </div>
 </body>
 </html>
