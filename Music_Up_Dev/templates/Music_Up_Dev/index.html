@@ -1,39 +1,15 @@
-{% load static %}
+{% extends 'Music_Up_Dev/base.html' %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link type="text/css" href="{% static 'Music_Up_Dev/css/style.css' %}" rel="stylesheet" />
-    <title>Music Up Dev Users</title>
-</head>
-<body>
-    <header>
-        <div class="container">
-            <div id="branding">
-                <h1><span class="highlight">Music Up</span> Dev</h1>
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="">Home</a></li>
-                    <li><a href="">About</a></li>
-                    <li><a href="">Services</a></li>
-                </ul>
-            </nav>
+{% block title %}Music Up Dev - Home{% endblock %}
+
+{% block content %}
+    {% for i in content %}
+        <div class="news_card">
+            <h2>{{ i.title }}</h2>
+            <p><strong>Title:</strong> {{ i.title }}</p>
+            <p><strong>Content:</strong> {{ i.content }}</p>
+            <p><strong>Author:</strong> {{ i.author }}</p>
+            <p><strong>Created:</strong> {{ i.created_at }}</p>
         </div>
-    </header>
-
-    <div class="container">
-        {% for i in content %}
-            <div class="news_card">
-                <h2>{{ i.title }}</h2>
-                <p><strong>Title:</strong> {{ i.title }}</p>
-                <p><strong>Content:</strong> {{ i.content }}</p>
-                <p><strong>Author:</strong> {{ i.author }}</p>
-                <p><strong>Created:</strong> {{ i.created_at }}</p>
-            </div>
-        {% endfor %}
-    </div>
-</body>
-</html>
+    {% endfor %}
+{% endblock %}

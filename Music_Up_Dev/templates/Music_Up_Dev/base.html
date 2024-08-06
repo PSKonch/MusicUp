@@ -1,0 +1,39 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" href="{% static 'Music_Up_Dev/css/style.css' %}" rel="stylesheet" />
+    <title>{% block title %}Music Up Dev{% endblock %}</title>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div id="branding">
+                <h1><span class="highlight">Music Up</span> Dev</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="">Home</a></li>
+                    <li><a href="">Artists</a></li>
+                    <li><a href="">Songs</a></li>
+                    <li><a href="">Posts</a></li>
+                    <li><a href="">Login</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>Copyright &copy; 2024 Music Up Dev</p>
+        </div>
+    </footer>
+</body>
+</html>
