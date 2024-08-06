@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import CustomUser, News
+from .models import CustomUser, News, Artist, Post, Song, Album
 
 # Create your views here.
 def index(request): #То же самое, что News
@@ -8,7 +8,8 @@ def index(request): #То же самое, что News
     return render(request, "Music_Up_Dev/index.html", {'content': queryset })
 
 def Artists_view(request):
-    return HttpResponse("Artists")
+    queryset = Artist.objects.all()
+    return render(request, "Music_Up_Dev/artists.html", {'content': queryset})
 
 def Posts_view(request):
     return HttpResponse('Posts')
