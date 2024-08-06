@@ -47,8 +47,8 @@ class Song(models.Model):
        return self.song_title
    
 class Post_News(models.Model):
-    title = models.CharField(max_length=200)
-    content = models.TextField()
+    title = models.CharField(max_length=200, blank=True)
+    content = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=timezone.now)
    
 class Post(Post_News):
