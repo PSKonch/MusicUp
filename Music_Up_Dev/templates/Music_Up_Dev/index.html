@@ -26,11 +26,12 @@
 
     <div class="container">
         {% for i in content %}
-            <div class="user-card">
-                <h2>{{ i.user_name }}</h2>
-                <p><strong>Email:</strong> {{ i.user_email }}</p>
-                <p><strong>Artist:</strong> {% if i.is_artist %}Yes{% else %}No{% endif %}</p>
-                <p><strong>Editor:</strong> {% if i.is_editor %}Yes{% else %}No{% endif %}</p>
+            <div class="news_card">
+                <h2>{{ i.title }}</h2>
+                <p><strong>Title:</strong> {{ i.title }}</p>
+                <p><strong>Content:</strong> {{ i.content }}</p>
+                <p><strong>Author:</strong> {{ i.author }}</p>
+                <p><strong>Created:</strong> {{ i.created_at }}</p>
             </div>
         {% endfor %}
     </div>

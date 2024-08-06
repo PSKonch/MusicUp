@@ -2,10 +2,20 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.contrib.auth import get_user, get_user_model, authenticate, login, logout
 from django.urls import reverse
-
+from django.contrib.auth.views import LoginView
+from django.contrib.auth.forms import AuthenticationForm
 from .forms import LoginUserForm
 
 # Create your views here.
+"""""
+class LoginUser(LoginView):
+    form_class = AuthenticationForm
+    template_name = 'user/login.html'
+    extra_context = {'title': 'Авторизация'}
+    
+    def get_success_url(self):
+        return HttpResponseRedirect(reverse('index'))
+"""""
 
 
 def login_user(request):
@@ -25,7 +35,7 @@ def login_user(request):
         form = LoginUserForm()
     
     return render(request, 'user/login.html', {'form' : form})
-            
+
 
 
 def logout_user(request):
