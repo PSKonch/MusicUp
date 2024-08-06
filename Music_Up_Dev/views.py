@@ -11,7 +11,10 @@ def Artists_view(request):
     return HttpResponse("Artists")
 
 def Posts_view(request):
-    return HttpResponse('posts')
+    return HttpResponse('Posts')
+
+def Songs_view(request):
+    return HttpResponse("Songs List")
 
 def Load_a_Song(request):
     return HttpResponse('Load a Song')
