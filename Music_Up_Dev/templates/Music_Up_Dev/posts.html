@@ -1,1 +1,11 @@
 {% extends 'Music_Up_Dev/base.html' %}
+
+{% block title %}Music Up Dev - Posts{% endblock %}
+
+{% block content %}
+    {% for i in content %}
+        <div class="artist_card">
+            <h2>{{ i.title }}</h2>
+        </div>
+    {% endfor %}
+{% endblock %}
