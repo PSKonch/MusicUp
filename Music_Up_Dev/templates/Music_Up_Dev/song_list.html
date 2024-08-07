@@ -1,1 +1,12 @@
 {% extends 'Music_Up_Dev/base.html' %}
+
+{% block content %}
+  <h2>Your Songs</h2>
+  <ul>
+    {% for song in songs %}
+      <li>{{ song.song_title }} - <a href="{{ song.file.url }}">Listen</a></li>
+    {% empty %}
+      <li>You have no songs uploaded yet.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}
