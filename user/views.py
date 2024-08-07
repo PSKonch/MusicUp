@@ -37,7 +37,7 @@ def login_user(request):
     return render(request, 'user/login.html', {'form' : form})
 
 
-"""
+
 def create_user_view(request):
     
     if request.method == 'POST':
@@ -52,7 +52,7 @@ def create_user_view(request):
     else: form = CreateUserForm()
     
     return render(request, 'user/user_creation.html', {'form': form})
-"""            
+        
             
             
         

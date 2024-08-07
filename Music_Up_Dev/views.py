@@ -1,13 +1,13 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
-from .models import CustomUser, News, Artist, Post, Post_News, Song, Album
+from .models import CustomUser, Post_News, Song, Album
 from django.contrib.auth.decorators import login_required
 from .forms import PostCreateForm
 
 # Create your views here.
 def index(request): #То же самое, что News
-    queryset = News.objects.all()
+    queryset = Post_News.objects.all()
     return render(request, "Music_Up_Dev/index.html", {'content': queryset })
 
 
