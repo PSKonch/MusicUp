@@ -4,7 +4,7 @@ from django.contrib.auth import get_user, get_user_model, authenticate, login, l
 from django.urls import reverse
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.forms import AuthenticationForm
-from .forms import LoginUserForm
+from .forms import LoginUserForm, CreateUserForm
 
 # Create your views here.
 """""
@@ -36,6 +36,26 @@ def login_user(request):
     
     return render(request, 'user/login.html', {'form' : form})
 
+
+"""
+def create_user_view(request):
+    
+    if request.method == 'POST':
+        form = CreateUserForm(request.POST)
+        
+        if form.is_valid():
+            cd = form.cleaned_data
+            user = form.save()
+            login(request, user)
+            return HttpResponseRedirect(reverse('index'))
+        
+    else: form = CreateUserForm()
+    
+    return render(request, 'user/user_creation.html', {'form': form})
+"""            
+            
+            
+        
 
 
 def logout_user(request):

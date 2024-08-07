@@ -25,9 +25,9 @@ class Post_News(models.Model):
     title = models.CharField(max_length=200, blank=True)
     content = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=timezone.now)
-   
+    
 class Post(Post_News):
-    author = models.ForeignKey(Artist, on_delete=models.CASCADE)
+    author = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     
 class News(Post_News):
     author = models.ForeignKey(Editor, on_delete=models.CASCADE)
