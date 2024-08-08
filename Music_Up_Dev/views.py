@@ -1,9 +1,15 @@
 from django.shortcuts import redirect, render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
+
+
 from .models import CustomUser, Post_News, Song, Album
 from django.contrib.auth.decorators import login_required
 from .forms import LoadMusicForm, PostCreateForm
+
+pages = {
+    
+}
 
 # Create your views here.
 def index(request): #То же самое, что News
@@ -50,18 +56,18 @@ def Load_a_Song(request):
 @login_required
 def Create_a_Post(request):
 
+    author = request.user  
+
     if request.method == 'POST':
         form = PostCreateForm(request.POST)
         
         if form.is_valid():
-            
-            try:
-                Post_News.objects.create(**form.cleaned_data)
-                return HttpResponseRedirect(reverse('posts'))
-            
-            except:
-                form.add_error(None, "Ошибка оформления")
-    else: form = PostCreateForm()
+
+            Post_News.objects.create(**form.cleaned_data, author=author)
+            return HttpResponseRedirect(reverse('posts'))
+
+    else:
+        form = PostCreateForm()
     
     return render(request, "Music_Up_Dev/create_post.html", {'form': form})
 

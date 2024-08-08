@@ -9,4 +9,4 @@ class CustomUser(AbstractUser):
     image = models.ImageField(upload_to='', blank=True)
     
     def __str__(self) -> str:
-        return self.email
+        return self.username
