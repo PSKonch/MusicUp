@@ -6,6 +6,8 @@
     {% for i in content %}
         <div class="artist_card">
             <h2>{{ i.title }}</h2>
+            <p>{{ i.content }}</p>
+            <p>{{ i.author }}</p>
         </div>
     {% endfor %}
 {% endblock %}
