@@ -20,7 +20,7 @@ class LoadMusicForm(forms.ModelForm):
 
     def save(self, commit=True):
         song = super(LoadMusicForm, self).save(commit=False)
-        song.artist = self.user
+        song.artist = self.user  
         if commit:
             song.save()
         return song
