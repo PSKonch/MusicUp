@@ -1,23 +1,23 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.contrib.auth import get_user, get_user_model, authenticate, login, logout
-from django.urls import reverse
-from django.contrib.auth.views import LoginView
+from django.urls import reverse, reverse_lazy
+from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.forms import AuthenticationForm
 from .forms import LoginUserForm, CreateUserForm
 
 # Create your views here.
-"""""
+
 class LoginUser(LoginView):
-    form_class = AuthenticationForm
+    form_class = LoginUserForm
     template_name = 'user/login.html'
     extra_context = {'title': 'Авторизация'}
     
     def get_success_url(self):
-        return HttpResponseRedirect(reverse('index'))
-"""""
+        return reverse_lazy('index')
 
 
+'''
 def login_user(request):
     
     if request.method == 'POST':
@@ -35,7 +35,7 @@ def login_user(request):
         form = LoginUserForm()
     
     return render(request, 'user/login.html', {'form' : form})
-
+'''
 
 
 def create_user_view(request):
@@ -58,8 +58,8 @@ def create_user_view(request):
         
 
 
-def logout_user(request):
-    logout(request)
-    return HttpResponseRedirect(reverse('login'))
+#def logout_user(request):
+#   logout(request)
+#   return HttpResponseRedirect(reverse('login'))
     
 
