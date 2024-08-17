@@ -31,7 +31,7 @@ def Posts_view(request):
 
 @login_required
 def Songs_view(request):
-    songs = Song.objects.filter(album__artist=request.user)
+    songs = Song.objects.all()
     return render(request, 'Music_Up_Dev/song_list.html', {'songs': songs})
 
 
