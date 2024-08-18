@@ -1,10 +1,13 @@
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth import get_user, get_user_model, authenticate, login, logout
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.decorators import login_required
 from .forms import LoginUserForm, CreateUserForm, UserPasswordChangeForm
+from .models import CustomUser
+from django.views.decorators.cache import never_cache
 
 # Create your views here.
 
@@ -53,14 +56,13 @@ def create_user_view(request):
     
     return render(request, 'user/user_creation.html', {'form': form})
         
-            
-            
         
-
-
+        
 def logout_user(request):
    logout(request)
    return HttpResponseRedirect(reverse('login'))
+
+
 
 def change_password(request):
     
@@ -73,11 +75,18 @@ def change_password(request):
             if form.user.check_password(cd['old_password']) and (cd['new_password1'] == cd['new_password2']):
                 form.user.set_password(cd['new_password1'])
                 form.user.save()
-                return redirect('')
+                return redirect('/')
             
     else: form = UserPasswordChangeForm(user=request.user)
         
     return render(request, 'user/change_password.html', {'form': form})
-    
 
+
+@login_required
+def UserProfile(request):
+    # Всегда обновляем `queryset` для текущего пользователя
+    queryset = get_object_or_404(CustomUser, username=request.user.username)
+    
+    context = {'queryset': queryset}
+    return render(request, 'user/profile.html', context)
 
