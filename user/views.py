@@ -1,10 +1,10 @@
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.contrib.auth import get_user, get_user_model, authenticate, login, logout
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.forms import AuthenticationForm
-from .forms import LoginUserForm, CreateUserForm
+from .forms import LoginUserForm, CreateUserForm, UserPasswordChangeForm
 
 # Create your views here.
 
@@ -58,8 +58,26 @@ def create_user_view(request):
         
 
 
-#def logout_user(request):
-#   logout(request)
-#   return HttpResponseRedirect(reverse('login'))
+def logout_user(request):
+   logout(request)
+   return HttpResponseRedirect(reverse('login'))
+
+def change_password(request):
     
+    if request.method == 'POST':
+        form = UserPasswordChangeForm(user=request.user, data=request.POST)
+
+        if form.is_valid():
+            cd = form.cleaned_data
+        
+            if form.user.check_password(cd['old_password']) and (cd['new_password1'] == cd['new_password2']):
+                form.user.set_password(cd['new_password1'])
+                form.user.save()
+                return redirect('')
+            
+    else: form = UserPasswordChangeForm(user=request.user)
+        
+    return render(request, 'user/change_password.html', {'form': form})
+    
+
 
