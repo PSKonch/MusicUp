@@ -13,4 +13,4 @@ class EmailAuthBackend(BaseBackend):
                 return user
             return None
         except:
-            return (user_model.DoesNotExist ,user_model.MultipleObjectsReturned)
+            return (user_model.DoesNotExist, user_model.MultipleObjectsReturned)
