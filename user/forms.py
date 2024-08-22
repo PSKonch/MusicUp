@@ -14,7 +14,7 @@ class LoginUserForm(AuthenticationForm):
 class CreateUserForm(UserCreationForm):
     
     class Meta:
-        model = CustomUser
+        model = get_user_model()
         fields = ('email', 'username', 'description', 'image')
         
 class UserPasswordChangeForm(PasswordChangeForm):

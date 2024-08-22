@@ -6,6 +6,8 @@ from django.urls import reverse
 from .models import CustomUser, Post_News, Song, Album
 from django.contrib.auth.decorators import login_required
 from .forms import LoadMusicForm, PostCreateForm
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
 
 pages = {
     

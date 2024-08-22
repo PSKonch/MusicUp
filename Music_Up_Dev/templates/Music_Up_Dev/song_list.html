@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
   <ul>
-    {% for song in songs %}
+    {% for song in songs %} 
         <li>
             <strong>{{ song.song_title }}</strong> by {{ song.album.artist.username }} <br>
             <audio controls>
