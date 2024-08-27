@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-!l7&(015eeb-4_%x#mfl*p_mkst3vu7w3mno5=a)!dnltn#y37
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -42,7 +42,9 @@ INSTALLED_APPS = [
     'Music_Up_Dev',
     'django_extensions',
     'user',
-    'django_redis'
+    'django_redis',
+    'redis',
+    'hiredis'
 ]
 
 MIDDLEWARE = [
@@ -100,7 +102,7 @@ DATABASES = {
 CACHES = {
     "default": {
         "BACKEND": "django.core.cache.backends.redis.RedisCache",
-        "LOCATION": "redis://127.0.0.1:6379",
+        "LOCATION": "redis://localhost:6379/0",
     }
 }
 
