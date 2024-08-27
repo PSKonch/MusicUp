@@ -8,6 +8,6 @@ urlpatterns = [
     path("Artists/", views.Artists_view, name="artists"),
     path("CreatePost/", (views.Create_a_Post), name="create_post"),
     path("Posts/", views.Posts_view, name="posts"),
-    path("Songs/", (views.Songs_view), name="song_list"),
+    path("Songs/", cache_page(30)(views.Songs_view), name="song_list"),
     path("LoadSong/", views.Load_a_Song, name="load_song"),
 ]

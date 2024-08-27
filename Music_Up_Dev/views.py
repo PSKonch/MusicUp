@@ -14,6 +14,7 @@ pages = {
 }
 
 # Create your views here.
+@cache_page(60 * 15)
 def index(request): #То же самое, что News
     queryset = Post_News.objects.all()
     return render(request, "Music_Up_Dev/index.html", {'content': queryset })
@@ -32,6 +33,7 @@ def Posts_view(request):
 
 
 @login_required
+@cache_page(60 * 15)
 def Songs_view(request):
     songs = Song.objects.all()
     return render(request, 'Music_Up_Dev/song_list.html', {'songs': songs})

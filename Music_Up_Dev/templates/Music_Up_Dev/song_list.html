@@ -1,14 +1,35 @@
 {% extends 'Music_Up_Dev/base.html' %}
 {% load static %}
 {% block content %}
-  <ul>
-    {% for song in songs %} 
+  <ul id="playlist">
+    {% for song in songs %}
         <li>
             <strong>{{ song.song_title }}</strong> by {{ song.album.artist.username }} <br>
-            <audio controls>
+            <audio controls id="audio-{{ forloop.counter }}">
                 <source src="{{ song.file.url }}" type="audio/mpeg">
             </audio>
         </li>
     {% endfor %}
   </ul>
 {% endblock %}
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const audios = document.querySelectorAll('audio');
+    let currentIndex = 0;
+
+    const playNextAudio = () => {
+      if (currentIndex < audios.length) {
+        audios[currentIndex].play();
+        audios[currentIndex].addEventListener('ended', () => {
+          currentIndex++;
+          playNextAudio();
+        }, { once: true });
+      } else {
+        console.log('Playlist ended');
+      }
+    };
+
+    playNextAudio();
+  });
+</script>
